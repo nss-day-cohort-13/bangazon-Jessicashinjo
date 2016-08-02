@@ -1,3 +1,4 @@
+import csv
 
 class Birdyboard():
 
@@ -13,12 +14,22 @@ class Birdyboard():
     '''
 
     with open("user_data.csv", "a+") as f:
-      reader = f.read()
+      user_data = full_name, screen_name
+      writer = csv.writer(f, delimiter=',')
+      writer.writerow(user_data)
 
     # try:
     # except Exception as e:
     #   raise
 
+  def read_users(self):
+    user_data = list()
+    with open("user_data.csv", "r+") as f:
+      reader = csv.reader(f)
+      for row in reader:
+        user_data.extend(row)
+
+    return user_data
 
   def write_chirp(self, full_name, screen_name, privacy, to_whom, message):
     ''' Takes arguments of the user's full name, screen name, if it should be
@@ -58,5 +69,9 @@ class Birdyboard():
     '''
     pass
 
+if __name__ == '__main__':
+  birdy = Birdyboard()
+  birdy.create_user("Jess", "Jessicasa")
+  birdy.read_users()
 
 # Separate functions to see if user_exists and screen_name exists?

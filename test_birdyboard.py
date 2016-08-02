@@ -3,17 +3,20 @@ from birdyboard import *
 
 class TestBirdyBoard(unittest.TestCase):
 
-
     @classmethod
-    def set_up(self):
-      self.birdyboard = Birdyboard()
-      self.message = [88, "Juniper Jones", "birdistheword", "public", "public", "chirpity chirp mate"]
-      self.write_message = birdyboard.write_chirp(self.message)
-      self.delete_message = birdyboard.delete_chirp(self.message)
-      # self.read_message = birdyboard.read_chirp()
+    def setUpClass(self):
+      self.birdy = Birdyboard()
+      # self.message = [88, "Juniper Jones", "birdistheword", "public", "public", "chirpity chirp mate"]
+      # self.write_message = birdy.write_chirp(self.message)
+      # self.delete_message = birdy.delete_chirp(self.message)
+      # self.read_message = birdy.read_chirp()
 
-    def test_new_user_is_a_dictionary(self):
-      self.assertEqual(self.birdyboard.create_user("Juniper Jones", "birdistheword"), [79, "Juniper Jones", "birdistheword"])
+    def test_new_user_is_a_csv_list(self):
+      self.birdy.create_user("Juniper Jones", "birdistheword")
+      user_data = list()
+      users = self.birdy.read_users()
+      user_data.extend(users)
+      self.assertIn("Juniper Jones", user_data)
 
     def test_chirp_is_written_to_chirps_file(self):
       self.write_message
@@ -27,7 +30,7 @@ class TestBirdyBoard(unittest.TestCase):
 
     def test_view_chirps_returns_chirps(self):
       self.write_message
-      message_list = birdyboard.read_chirps()
+      message_list = birdy.read_chirps()
       self.delete_message
       self.assertTrue(message_list == [str])
 
