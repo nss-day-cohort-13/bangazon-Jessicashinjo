@@ -7,7 +7,7 @@ class TestBirdyBoard(unittest.TestCase):
     @classmethod
     def set_up(self):
       self.birdyboard = Birdyboard()
-      self.message = [88, "Juniper Jones", "public", "Jessie Jones", "chirpity chirp mate"]
+      self.message = [88, "Juniper Jones", "public", "public", "chirpity chirp mate"]
       self.write_message = birdyboard.write_chirp(self.message)
       self.delete_message = birdyboard.delete_chirp(self.message)
       # self.read_message = birdyboard.read_chirp()
