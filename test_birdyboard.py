@@ -3,28 +3,37 @@ from birdyboard import *
 
 class TestBirdyBoard(unittest.TestCase):
 
+
+    @classmethod
+    def set_up(self):
+      self.birdyboard = Birdyboard()
+      self.message = [88, "Juniper Jones", "public", "Jessie Jones", "chirpity chirp mate"]
+      self.write_message = birdyboard.write_chirp(self.message)
+      self.delete_message = birdyboard.delete_chirp(self.message)
+      # self.read_message = birdyboard.read_chirp()
+
     def test_new_user_is_a_dictionary(self):
-      birdyboard = Birdyboard()
-      self.assertEqual(birdyboard.create_user("Juniper Jones", "birdistheword"), {"userID": 79, "full_name": "Juniper Jones", "screen_name": "birdistheword"})
+      self.assertEqual(self.birdyboard.create_user("Juniper Jones", "birdistheword"), [79, "Juniper Jones", "birdistheword"])
 
-    # def test_new_user_is_in_user_data_txt_file(arg):
-      # pass
+    def test_chirp_is_written_to_chirps_file(self):
+      self.write_message
+      self.assertIn(self.message,'chirps.csv')
+      self.delete_message
 
-    # def test_correct_user_is_selected(self):
-    #   birdyboard = Birdyboard()
-    #   self.assertEqual()
+    def test_chirp_is_removed_from_chirps_file(self):
+      self.write_message
+      self.delete_message
+      self.assertNotIn(self.message, 'chirps.csv')
 
-    def test_only_correct_user_and_public_chirps_are_shown(self):
-      birdyboard = Birdyboard()
+    def test_view_chirps_returns_chirps(self):
+      self.write_message
+      message_list = birdyboard.read_chirps()
+      self.delete_message
+      self.assertTrue(message_list == [str])
 
-    def test_chirp_writes_to_public_file(self):
-      pass
-
-    def test_private_chirp_writes_to_correct_file_under_user(self):
-      pass
-
-    # def test_when_6_is_chosen_program_exits(self):
+    # def test_private_chirp_is_private(self):
     #   pass
+
 
 if __name__ == '__main__':
   unittest.main()
@@ -38,3 +47,14 @@ if __name__ == '__main__':
 # 4. Public Chirp
 # 5. Private Chirp
 # 6. Exit
+
+
+# Tests to write first round
+# test_user_is_created
+# test_chirp_is_written_to_chirps_file
+# test_view_chirps_shows_chirps
+# test_private_chirp_is_private
+
+# Do I test these things or just deal with exception handling?
+# If full_name or user_name input is empty
+# userID creation
