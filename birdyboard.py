@@ -2,7 +2,7 @@
 class Birdyboard():
 
   def create_user(self, full_name, screen_name):
-    ''' Takes arguements of the user's full name and the user's screen name:
+    ''' Takes arguments of the user's full name and the user's screen name:
 
     Checks to see if user_data file exists. If the file does not exist
     it will create the file and add the user. If it does exist, it will read
@@ -11,7 +11,14 @@ class Birdyboard():
     and he or she will be added to the csv file with the user_id, full_name,
     and screen_name.
     '''
-    pass
+
+    with open("user_data.csv", "a+") as f:
+      reader = f.read()
+
+    # try:
+    # except Exception as e:
+    #   raise
+
 
   def write_chirp(self, full_name, screen_name, privacy, to_whom, message):
     ''' Takes arguments of the user's full name, screen name, if it should be
