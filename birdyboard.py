@@ -1,4 +1,4 @@
-import csv
+import pickle
 import uuid
 
 class Birdyboard():
@@ -14,24 +14,15 @@ class Birdyboard():
     and screen_name.
     '''
 
-    with open("user_data.csv", "a+") as csv_file:
-      # user_id = uuid.uuid4()
-      # user_data = user_id, full_name, screen_name
-      # writer = csv.writer(csv_file, delimiter=',')
-      # writer.writerow(user_data)
-
+    with open("user_data.txt", "ab+") as pickle_file:
       user_id = str(uuid.uuid4())
-      data_headers = ["user_uuid","user_name","user_screen_name"]
 
-      user_data = dict()
-      user_data["user_uuid"] = user_id
-      user_data["user_name"] = full_name
-      user_data["user_screen_name"] = screen_name
-
-      writer = csv.DictWriter(csv_file, delimiter=',', fieldnames=data_headers)
-      writer.writeheader()
-      writer.writerow(user_data)
-
+      user_data = {
+        "user_uuid": user_id,
+        "user_name": full_name,
+        "user_screen_name": screen_name
+      }
+      pickle.dump(user_data, pickle_file)
 
 
     # try:
@@ -39,13 +30,13 @@ class Birdyboard():
     #   raise
 
   def read_users(self):
-    user_data = list()
-    with open("user_data.csv", "r+") as f:
-      reader = csv.reader(f)
-      for row in reader:
-        user_data.extend(row)
-    print(user_data)
-    return user_data
+    users_deserialized = {}
+    with open("user_data.txt", "rb+") as pickle_file:
+      users_deserialized = pickle.load(pickle_file)
+
+    print(users_deserialized)
+    return users_deserialized
+
 
   def write_chirp(self, full_name, screen_name, privacy, to_whom, message):
     ''' Takes arguments of the user's full name, screen name, if it should be
