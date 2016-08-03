@@ -1,4 +1,5 @@
 import csv
+import uuid
 
 class Birdyboard():
 
@@ -13,10 +14,25 @@ class Birdyboard():
     and screen_name.
     '''
 
-    with open("user_data.csv", "a+") as f:
-      user_data = full_name, screen_name
-      writer = csv.writer(f, delimiter=',')
+    with open("user_data.csv", "a+") as csv_file:
+      # user_id = uuid.uuid4()
+      # user_data = user_id, full_name, screen_name
+      # writer = csv.writer(csv_file, delimiter=',')
+      # writer.writerow(user_data)
+
+      user_id = str(uuid.uuid4())
+      data_headers = ["user_uuid","user_name","user_screen_name"]
+
+      user_data = dict()
+      user_data["user_uuid"] = user_id
+      user_data["user_name"] = full_name
+      user_data["user_screen_name"] = screen_name
+
+      writer = csv.DictWriter(csv_file, delimiter=',', fieldnames=data_headers)
+      writer.writeheader()
       writer.writerow(user_data)
+
+
 
     # try:
     # except Exception as e:
@@ -28,7 +44,7 @@ class Birdyboard():
       reader = csv.reader(f)
       for row in reader:
         user_data.extend(row)
-
+    print(user_data)
     return user_data
 
   def write_chirp(self, full_name, screen_name, privacy, to_whom, message):
@@ -44,7 +60,10 @@ class Birdyboard():
     (automatically listed as "public" if privacy is public), and message to the
     chirps.csv file.
     '''
-    pass
+    with open("chirps.csv", "a+") as f:
+      chirps = full_name, screen_name, privacy, to_whom, message
+      writer = csv.writer(f, delimiter=',')
+      writer.writerow(chirps)
 
   def read_chirps(self, screen_name):
     ''' Takes the user's screen_name as its argument:
@@ -54,7 +73,14 @@ class Birdyboard():
     screen_name does exist it will print public and the user's private chirps in
     separate sections.
     '''
-    pass
+    chirps = list()
+    with open("chirps.csv", "r+") as f:
+      reader = csv.reader(f)
+      for row in reader:
+        chirps.extend(row)
+
+    print(chirps)
+    return chirps
 
   def delete_chirp(self, screen_name, chirp_id):
     ''' Takes arguments of the user's screen name and id of the message to be
@@ -73,5 +99,7 @@ if __name__ == '__main__':
   birdy = Birdyboard()
   birdy.create_user("Jess", "Jessicasa")
   birdy.read_users()
+  # birdy.read_chirps("Jessicasa")
+  # birdy.write_chirp("Jess", "Jessicasa", True, "Public", "Chirpy Chirpy man")
 
 # Separate functions to see if user_exists and screen_name exists?
