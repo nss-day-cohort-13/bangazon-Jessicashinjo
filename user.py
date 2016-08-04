@@ -25,7 +25,7 @@ class User():
     try:
       self.read_users()
 
-    except:
+    except EOFError:
       pass
 
     with open("user_data.txt", "wb+") as pickle_file:
@@ -55,3 +55,4 @@ if __name__ == '__main__':
   user = User()
   # user.read_users()
   user.create_user("Juniper Jones", "JJPop")
+  # user.create_user("Flipity Flop", "Fidyldydo")
