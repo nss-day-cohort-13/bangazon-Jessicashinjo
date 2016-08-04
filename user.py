@@ -51,4 +51,4 @@ class User():
 if __name__ == '__main__':
   user = User()
   # user.read_users()
-  user.create_user("Joe", "Joeydoughy")
+  user.create_user("Juniper Jones", "JJPop")
