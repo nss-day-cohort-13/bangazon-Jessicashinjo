@@ -50,6 +50,9 @@ class User():
     print(self.users_deserialized)
     return self.users_deserialized
 
+  def delete_user(self):
+    pass
+
 
 if __name__ == '__main__':
   user = User()
