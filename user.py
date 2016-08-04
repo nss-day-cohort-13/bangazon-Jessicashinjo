@@ -1,6 +1,11 @@
 import pickle
 import uuid
 
+class User():
+
+  def __init__(self):
+    self.users_deserialized = []
+
   def create_user(self, full_name, screen_name):
     ''' Takes arguments of the user's full name and the user's screen name:
 
@@ -12,7 +17,7 @@ import uuid
     and screen_name.
     '''
 
-    with open("user_data.txt", "ab+") as pickle_file:
+    with open("user_data.txt", "wb+") as pickle_file:
       user_id = str(uuid.uuid4())
 
       user_data = {
@@ -20,20 +25,27 @@ import uuid
         "user_name": full_name,
         "user_screen_name": screen_name
       }
-      pickle.dump(user_data, pickle_file)
 
+      self.users_deserialized.append(user_data)
+      print(self.users_deserialized)
 
+      pickle.dump(self.users_deserialized, pickle_file)
+
+      # if I try to read users before uses exist I get a an EOFError "ran out of time"
     # try:
-    # except Exception as e:
+        # user.read_users()
+    # except EOFError as e:
     #   raise
 
   def read_users(self):
-    users_deserialized = []
     with open("user_data.txt", "rb+") as pickle_file:
-      users_deserialized = pickle.load(pickle_file)
+      self.users_deserialized = pickle.load(pickle_file)
 
-    print(users_deserialized)
-    return users_deserialized
+    print(self.users_deserialized)
+    return self.users_deserialized
 
 
 if __name__ == '__main__':
+  user = User()
+  user.read_users()
+  user.create_user("Joe", "Joeydoughy")
