@@ -41,7 +41,7 @@ class User():
     with open("user_data.txt", "rb+") as pickle_file:
       self.users_deserialized = pickle.load(pickle_file)
 
-    print(self.users_deserialized)
+    # print(self.users_deserialized)
     return self.users_deserialized
 
   def delete_user(self):

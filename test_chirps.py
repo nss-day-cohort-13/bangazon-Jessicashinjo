@@ -8,10 +8,10 @@ class TestChirps(unittest.TestCase):
   def setUpClass(self):
     self.chirps = Chirps()
     self.testable_public_chirp = self.chirps.create_public_chirp("14e234r2341", "If you have Monochromacy colorblindness can you truely understand color?")
-    self.testable_private_chirp = self.chirps.create_private_chirp("14e234r2341", "Juniper Jones", "Yer pants are on fire mate")
+    # self.testable_private_chirp = self.chirps.create_private_chirp("14e234r2341", "Juniper Jones", "Yer pants are on fire mate")
     # self.testable_private_chirp = self.chirps.create_private_chirp(user_id, full_name, screen_name, to_whom, message)
     self.read_public_chirps = self.chirps.read_public_chirps()
-    self.read_private_chirps = self.chirps.read_private_chirps()
+    # self.read_private_chirps = self.chirps.read_private_chirps()
 
     def tearDown(self):
       # Delete the test chirps from the chirps.txt file
