@@ -16,12 +16,14 @@ class User():
     and he or she will be added to the csv file with the user_id, full_name,
     and screen_name.
     '''
+
+    # If I try to read users before uses exist I get a an EOFError "ran out of input"
+    # The try solves fixes this.
     try:
       self.read_users()
 
     except:
       pass
-
 
     with open("user_data.txt", "wb+") as pickle_file:
       user_id = str(uuid.uuid4())
@@ -33,15 +35,7 @@ class User():
       }
 
       self.users_deserialized.append(user_data)
-      # print(self.users_deserialized)
-
       pickle.dump(self.users_deserialized, pickle_file)
-
-      # if I try to read users before uses exist I get a an EOFError "ran out of input"
-    # try:
-        # user.read_users()
-    # except EOFError as e:
-    #   raise
 
   def read_users(self):
     with open("user_data.txt", "rb+") as pickle_file:

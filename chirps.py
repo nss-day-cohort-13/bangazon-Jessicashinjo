@@ -1,9 +1,11 @@
 import pickle
 import uuid
 
-class Chirps:
+class Chirps():
+    def __init__(self):
 
-  def write_chirp(self, full_name, screen_name, privacy, to_whom, message):
+
+  def write_chirp(self, user_id, full_name, screen_name, privacy, to_whom, message):
     ''' Takes arguments of the user's full name, screen name, if it should be
         public or private, who the chirp will be sent to, and the message
         itself:
@@ -16,16 +18,8 @@ class Chirps:
     (automatically listed as "public" if privacy is public), and message to the
     chirps.csv file.
     '''
-    with open("chirps.txt", "ab+") as pickle_file:
-      chirp_id = str(uuid.uuid4())
 
-      chirp_data = {
-        "chirp_uuid": chirp_id,
-        "user_uuid": user_id,
-        "user_name": full_name,
-        "user_screen_name": screen_name
-      }
-      pickle.dump(user_data, pickle_file)
+
 
   def read_chirps(self, screen_name):
     ''' Takes the user's screen_name as its argument:
@@ -35,12 +29,7 @@ class Chirps:
     screen_name does exist it will print public and the user's private chirps in
     separate sections.
     '''
-    chirps_deserialized = {}
-    with open("chirps.txt", "rb+") as pickle_file:
-      chirps_deserialized = pickle.load(pickle_file)
 
-    print(chirps_deserialized)
-    return chirps_deserialized
 
   def delete_chirp(self, screen_name, chirp_id):
     ''' Takes arguments of the user's screen name and id of the message to be

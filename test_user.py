@@ -7,6 +7,7 @@ class Test_User(unittest.TestCase):
   @classmethod
   def setUpClass(self):
     self.user = User()
+    self.testable_user = self.user.create_user("Juniper Jones", "birdistheword")
 
   def tearDown(self):
     # Delete the test user from user_data.txt file
@@ -18,7 +19,7 @@ class Test_User(unittest.TestCase):
     every user's name to a list. Then assertIn asserts that the test user's name
     is in the list of user's names.'''
 
-    self.user.create_user("Juniper Jones", "birdistheword")
+
     users = self.user.read_users()
     user_list = []
     user_id = []
@@ -29,7 +30,7 @@ class Test_User(unittest.TestCase):
     self.assertIn("Juniper Jones", user_list)
     self.assertNotIn('', user_id)
 
-  # def test_user_has_id(self):
+  # def test_user_was_deleted(self):
   #   pass
 
 if __name__ == '__main__':
