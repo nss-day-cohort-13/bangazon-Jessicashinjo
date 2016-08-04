@@ -16,6 +16,9 @@ class User():
     and he or she will be added to the csv file with the user_id, full_name,
     and screen_name.
     '''
+    ##########################################################################
+    # Write code to check for existing users or errors will rain down upon you
+    ##########################################################################
 
     # If I try to read users before uses exist I get a an EOFError "ran out of input"
     # The try solves fixes this.

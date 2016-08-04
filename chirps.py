@@ -7,16 +7,9 @@ class Chirps():
     self.public_chirps_deserialized = []
     self.user = User()
 
-  def create_public_chirp(self, user_id, message):
-    # sender = list()
-    # users = []
+  def create_public_chirp(self, screen_name, message):
     try:
       users = self.read_public_chirps()
-      # for each_user in users:
-      #   print("Each User is: ", each_user)
-      #   if user_id == each_user[user_id]:
-      #     sender.append(each_user)
-      #     print("The sender is: ", sender)
 
     except:
       pass
@@ -24,19 +17,19 @@ class Chirps():
 
     with open("public_chirps.txt", "wb+") as pickle_file:
       chirp_id = str(uuid.uuid4())
-      screen_name = str
+      user_id = str
       for each_user in self.user.read_users():
         # print("Each User", each_user)
-        if user_id == each_user["user_uuid"]:
+        if screen_name == each_user["user_screen_name"]:
           # print("You made it this far mate")
-          screen_name = each_user["user_screen_name"]
+          user_id = each_user["user_uuid"]
         else:
-          print("user is", each_user["user_uuid"])
+          print("user is", each_user["user_screen_name"])
 
       chirp_data = {
         "user_uuid": user_id,
-        # "user_name": full_name,
         "user_screen_name": screen_name,
+        "chirp_uuid": chirp_id,
         "public": True,
         "message": message
       }
@@ -111,5 +104,5 @@ class Chirps():
 
 if __name__ == '__main__':
   chirps = Chirps()
-  chirps.create_public_chirp('7da6e48f-db50-499a-afe9-22abac764442', "awwwww yeaaaaa")
+  chirps.create_public_chirp('JJPop', "awwwww yeaaaaa")
   chirps.read_public_chirps()

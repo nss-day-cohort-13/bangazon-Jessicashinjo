@@ -1,5 +1,6 @@
 import unittest
 from chirps import *
+from user import *
 
 
 class TestChirps(unittest.TestCase):
@@ -7,7 +8,8 @@ class TestChirps(unittest.TestCase):
   @classmethod
   def setUpClass(self):
     self.chirps = Chirps()
-    self.testable_public_chirp = self.chirps.create_public_chirp("14e234r2341", "If you have Monochromacy colorblindness can you truely understand color?")
+    self.user_class = User().create_user("Test User", "test_yoself")
+    self.testable_public_chirp = self.chirps.create_public_chirp("test_yoself", "If you have Monochromacy colorblindness can you truely understand color?")
     # self.testable_private_chirp = self.chirps.create_private_chirp("14e234r2341", "Juniper Jones", "Yer pants are on fire mate")
     # self.testable_private_chirp = self.chirps.create_private_chirp(user_id, full_name, screen_name, to_whom, message)
     self.read_public_chirps = self.chirps.read_public_chirps()
@@ -22,8 +24,8 @@ class TestChirps(unittest.TestCase):
     chirp_list = []
     chirp_id = []
     for specific_chirp in chirps:
-      chirp_list.append(specific_chirp["chirp_message"])
-      chirp_id.append(chirp_name["chirp_uuid"])
+      chirp_list.append(specific_chirp["message"])
+      chirp_id.append(specific_chirp["chirp_uuid"])
     # print("chirps List", chirp_list)
     self.assertIn("If you have Monochromacy colorblindness can you truely understand color?", chirp_list)
     self.assertNotIn('', chirp_id)
