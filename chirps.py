@@ -112,8 +112,13 @@ class Chirps():
       for user in private_messages:
         if screen_name == user["sender_screen_name"]:
           message = {
+            "receiver_id": user["receiver_uuid"],
             "receiver": user["receiver_screen_name"],
-            "message": user["message"]
+            "message": user["message"],
+            "sender_id": user["sender_uuid"],
+            "sender": user["sender_screen_name"],
+            "chirp_id": user["chirp_uuid"],
+            "privacy": user["public"]
           }
           user_messages.append(message)
           # print(private_messages["receiver_screen_name"])
