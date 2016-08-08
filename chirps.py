@@ -1,5 +1,7 @@
 import pickle
 import uuid
+from datetime import datetime
+from time import time
 from user import *
 
 class Chirps():
@@ -11,7 +13,7 @@ class Chirps():
   # Passed in screen_name vs uuid because screen_name was easier to test
   def create_public_chirp(self, screen_name, message):
     try:
-      users = self.read_public_chirps()
+      self.read_public_chirps()
     except EOFError:
       pass
 
@@ -22,20 +24,25 @@ class Chirps():
     with open("public_chirps.txt", "wb+") as pickle_file:
       chirp_id = str(uuid.uuid4())
       user_id = str
+      current_time = time()
+      timestamp = datetime.fromtimestamp(current_time).strftime('%Y-%m-%d %H:%M:%S')
       for each_user in self.user.read_users():
         # print("Each User", each_user)
         if screen_name == each_user["user_screen_name"]:
           # print("You made it this far mate")
           user_id = each_user["user_uuid"]
         else:
-          print("user is", each_user["user_screen_name"])
+          pass
+          # Throw exception "user not found"
+          # print("user is", each_user["user_screen_name"])
 
       chirp_data = {
         "user_uuid": user_id,
         "user_screen_name": screen_name,
         "chirp_uuid": chirp_id,
         "public": True,
-        "message": message
+        "message": message,
+        "timestamp": timestamp
       }
 
       self.public_chirps_deserialized.append(chirp_data)
@@ -78,6 +85,8 @@ class Chirps():
       chirp_id = str(uuid.uuid4())
       user_id = str
       receiver_id = str
+      current_time = time()
+      timestamp = datetime.fromtimestamp(current_time).strftime('%Y-%m-%d %H:%M:%S')
       for each_user in self.user.read_users():
         # print("Each User", each_user)
         if screen_name == each_user["user_screen_name"]:
@@ -96,7 +105,8 @@ class Chirps():
             "receiver_uuid": receiver_id,
             "receiver_screen_name": send_to_screen_name,
             "public": False,
-            "message": message
+            "message": message,
+            "timestamp": timestamp
           }
 
           self.private_chirps_deserialized.append(chirp_data)
@@ -118,13 +128,10 @@ class Chirps():
             "sender_id": user["sender_uuid"],
             "sender": user["sender_screen_name"],
             "chirp_id": user["chirp_uuid"],
-            "privacy": user["public"]
+            "privacy": user["public"],
+            "timestamp": user["timestamp"]
           }
           user_messages.append(message)
-          # print(private_messages["receiver_screen_name"])
-          # print(private_messages["message"])
-    # print(user_messages["receiver"])
-    # print(user_messages["message"])
     print(user_messages)
     return user_messages
 
@@ -144,5 +151,7 @@ class Chirps():
 
 if __name__ == '__main__':
   chirps = Chirps()
-  chirps.create_private_chirp('JJPop', 'Fidyldydo', "Sushhhhhiiiiin")
-  chirps.read_private_chirps('JJPop')
+  # chirps.create_public_chirp('JJPop', "Public service announcement yoooo")
+  chirps.read_public_chirps()
+  # chirps.create_private_chirp('JJPop', 'Fidyldydo', "Sushhhhhiiiiin")
+  # chirps.read_private_chirps('JJPop')
