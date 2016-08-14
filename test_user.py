@@ -6,12 +6,16 @@ class Test_User(unittest.TestCase):
 
   @classmethod
   def setUpClass(self):
-    self.user = User()
-    self.testable_user = self.user.create_user("Juniper Jones", "birdistheword")
+    self.test_user = User("Juniper Jones", "birdistheword")
 
   def tearDown(self):
     # Delete the test user from user_data.txt file
     pass
+
+  def test_user_creation(self):
+    self.assertIsNotNone(self.test_user.user_id)
+    self.assertEqual(self.test_user.full_name, "Juniper Jones")
+    self.assertEqual(self.test_user.screen_name, "birdistheword")
 
   def test_new_user_is_in_user_data_file_with_id_that_is_not_empty_string(self):
     ''' This test calls the create_user function to ensure that our test user
@@ -20,15 +24,17 @@ class Test_User(unittest.TestCase):
     is in the list of user's names.'''
 
 
-    users = self.user.read_users()
-    user_list = []
-    user_id = []
-    for user_name in users:
-      user_list.append(user_name["user_name"])
-      user_id.append(user_name["user_uuid"])
+    users = self.test_user.read_users()
+    user_data = []
+
+    for user in users:
+      user_data.append(user["user_uuid"])
+      user_data.append(user["user_name"])
+      user_data.append(user["user_screen_name"])
     # print("users List", user_list)
-    self.assertIn("Juniper Jones", user_list)
-    self.assertNotIn('', user_id)
+    self.assertIn(self.test_user.user_id, user_data)
+    self.assertIn("Juniper Jones", user_data)
+    self.assertIn("birdistheword", user_data)
 
   # def test_user_was_deleted(self):
   #   pass

@@ -1,12 +1,20 @@
 import pickle
 import uuid
 
-class User():
+class User:
 
-  def __init__(self):
-    self.users_deserialized = []
+  def __init__(self, user_name, user_screen_name):
+    self.user_id = uuid.uuid4().int
+    self.full_name = user_name
+    self.screen_name = user_screen_name
+    self.user_data = {
+                      "user_uuid": self.user_id,
+                      "user_name": self.full_name,
+                      "user_screen_name": self.screen_name
+                      }
+    self.create_user()
 
-  def create_user(self, full_name, screen_name):
+  def create_user(self):
     ''' Takes arguments of the user's full name and the user's screen name:
 
     Checks to see if user_data file exists. If the file does not exist
@@ -20,39 +28,30 @@ class User():
     # Write code to check for existing users or errors will rain down upon you
     ##########################################################################
 
-    # If I try to read users before uses exist I get a an EOFError "ran out of input"
-    # The try solves fixes this.
-    try:
-      self.read_users()
+    with open("user_data.txt", "ab+") as pickle_file:
+      pickle.dump(self.user_data, pickle_file)
 
-    except EOFError:
-      pass
+  @staticmethod
+  def read_users():
+    """ """
+    users_deserialized = []
+    with open("user_data.txt", "rb") as pickle_file:
+      while True:
+        try:
+            users_deserialized.append(pickle.load(pickle_file))
+        except FileNotFoundError:
+          print("I'm a potato!")
+        except EOFError:
+          break
 
-    with open("user_data.txt", "wb+") as pickle_file:
-      user_id = str(uuid.uuid4())
+      print(users_deserialized)
+      return users_deserialized
 
-      user_data = {
-        "user_uuid": user_id,
-        "user_name": full_name,
-        "user_screen_name": screen_name
-      }
-
-      self.users_deserialized.append(user_data)
-      pickle.dump(self.users_deserialized, pickle_file)
-
-  def read_users(self):
-    with open("user_data.txt", "rb+") as pickle_file:
-      self.users_deserialized = pickle.load(pickle_file)
-
-    # print(self.users_deserialized)
-    return self.users_deserialized
-
-  def delete_user(self):
-    pass
+  # def delete_user(self):
+    # pass
 
 
-if __name__ == '__main__':
-  user = User()
-  # user.read_users()
-  user.create_user("Juniper Jones", "JJPop")
-  # user.create_user("Flipity Flop", "Fidyldydo")
+# if __name__ == '__main__':
+  # User("Juniper Jones", "JJPop")
+  # User.read_users()
+  # User("Flipity Flop", "Fidyldydo")
