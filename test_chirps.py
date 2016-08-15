@@ -25,7 +25,7 @@ class TestChirps(unittest.TestCase):
     self.assertEqual(self.first_user.screen_name, self.test_chirp_one.screen_name)
     self.assertEqual(True, self.test_chirp_one.public)
 
-  def test_public_chirp_is_written_to_chirps_file_with_chirp_id(self):
+  def test_public_chirp_is_in_chirps_file(self):
     chirps = deserialize("chirps.txt")
     chirp_list = []
     for chirp in chirps:

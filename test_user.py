@@ -1,5 +1,6 @@
 import unittest
 from user import *
+from service_functions import *
 
 
 class Test_User(unittest.TestCase):
@@ -17,14 +18,14 @@ class Test_User(unittest.TestCase):
     self.assertEqual(self.test_user.full_name, "Juniper Jones")
     self.assertEqual(self.test_user.screen_name, "birdistheword")
 
-  def test_new_user_is_in_user_data_file_with_id_that_is_not_empty_string(self):
+  def test_new_user_is_in_user_data_file(self):
     ''' This test calls the create_user function to ensure that our test user
     is in the file being tested. Then it reads the users in the file and adds
     every user's name to a list. Then assertIn asserts that the test user's name
     is in the list of user's names.'''
 
 
-    users = self.test_user.read_users()
+    users = deserialize("user_data.txt")
     user_data = []
 
     for user in users:

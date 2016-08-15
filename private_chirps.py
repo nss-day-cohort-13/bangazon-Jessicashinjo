@@ -1,7 +1,5 @@
 import pickle
 import uuid
-from datetime import datetime
-from time import time
 from user import *
 from chirps import *
 from service_functions import *
@@ -13,7 +11,7 @@ class PrivateChirps(Chirps):
     Chirps.__init__(self, user_id, user_screen_name, message)
     # self.current_time = time()
     # self.timestamp = datetime.fromtimestamp(self.current_time).strftime('%Y-%m-%d %H:%M:%S')
-    self.private_chirp_id = uuid.uuid4().int
+    # self.chirp_id = generate_uuid()
     # self.user_uuid = user_id
     # self.screen_name = user_screen_name
     # self.message = message
@@ -24,7 +22,7 @@ class PrivateChirps(Chirps):
     self.private_chirp_data = {
             "user_uuid": self.user_uuid,
             "user_screen_name": self.screen_name,
-            "chirp_uuid": self.private_chirp_id,
+            "chirp_uuid": self.chirp_id,
             "public": self.public,
             "message": self.message,
             "timestamp": self.timestamp,

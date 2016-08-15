@@ -7,10 +7,8 @@ from service_functions import *
 
 class Chirps:
   def __init__(self, user_id, user_screen_name, message):
-
-    self.current_time = time()
-    self.timestamp = datetime.fromtimestamp(self.current_time).strftime('%Y-%m-%d %H:%M:%S')
-    self.chirp_id = uuid.uuid4().int
+    self.timestamp = timestamp()
+    self.chirp_id = generate_uuid()
     self.user_uuid = user_id
     self.screen_name = user_screen_name
     self.message = message
