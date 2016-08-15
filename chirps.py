@@ -15,6 +15,7 @@ class Chirps:
     self.screen_name = user_screen_name
     self.message = message
     self.public = True
+    self.storage_file = "chirps.txt"
     self.chirp_data = {
             "user_uuid": self.user_uuid,
             "user_screen_name": self.screen_name,
@@ -23,7 +24,7 @@ class Chirps:
             "message": self.message,
             "timestamp": self.timestamp
             }
-    serialize("chirps.txt", self.chirp_data)
+    serialize(self.storage_file, self.chirp_data)
 
   # def delete_public_chirp(self, screen_name, chirp_id):
   #   ''' Takes arguments of the user's screen name and id of the message to be
