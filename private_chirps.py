@@ -8,7 +8,7 @@ from service_functions import *
 #   def __init__(self, user_id, user_screen_name, message):
 class PrivateChirps(Chirps):
   def __init__(self, user_id, user_screen_name, message, receiver_id, receiver_screen_name):
-    Chirps.__init__(self, user_id, user_screen_name, message)
+    super().__init__(self, user_id, user_screen_name, message)
     # self.current_time = time()
     # self.timestamp = datetime.fromtimestamp(self.current_time).strftime('%Y-%m-%d %H:%M:%S')
     # self.chirp_id = generate_uuid()
@@ -124,9 +124,9 @@ class PrivateChirps(Chirps):
   #   if self.user_uuid == user["user_uuid"]:
 
 
-if __name__ == '__main__':
-  PrivateChirps(86419575609614075990463230600833442718, 'check_yoself', "Do private chirps work?", 148483404200007806254540872871643687611, 'test_yoself')
+# if __name__ == '__main__':
+  # PrivateChirps(86419575609614075990463230600833442718, 'check_yoself', "Do private chirps work?", 148483404200007806254540872871643687611, 'test_yoself')
   # chirps.create_public_chirp('JJPop', "Public service announcement yoooo")
-  deserialize("chirps.txt")
+  # deserialize("chirps.txt")
   # chirps.create_private_chirp('JJPop', 'Fidyldydo', "Sushhhhhiiiiin")
   # chirps.read_private_chirps('JJPop')

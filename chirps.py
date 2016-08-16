@@ -6,14 +6,13 @@ from user import *
 from service_functions import *
 
 class Chirps:
-  def __init__(self, user_id, user_screen_name, message):
+  def __init__(self, user_id, user_screen_name, message, storage_file='chirps.txt'):
     self.timestamp = timestamp()
     self.chirp_id = generate_uuid()
     self.user_uuid = user_id
     self.screen_name = user_screen_name
     self.message = message
     self.public = True
-    self.storage_file = "chirps.txt"
     self.chirp_data = {
             "user_uuid": self.user_uuid,
             "user_screen_name": self.screen_name,
@@ -22,7 +21,7 @@ class Chirps:
             "message": self.message,
             "timestamp": self.timestamp
             }
-    serialize(self.storage_file, self.chirp_data)
+    serialize(storage_file, self.chirp_data)
 
   # def delete_public_chirp(self, screen_name, chirp_id):
   #   ''' Takes arguments of the user's screen name and id of the message to be
@@ -38,7 +37,7 @@ class Chirps:
   #   pass
 
 
-if __name__ == '__main__':
-  Chirps(1643865979, 'BoBoFoSho', "Sho blamaaaaa")
-  # PublicChirps('JJPop', "Public service announcement yoooo")
-  deserialize("chirps.txt")
+# if __name__ == '__main__':
+#   Chirps(1643865979, 'BoBoFoSho', "Sho blamaaaaa")
+#   # PublicChirps('JJPop', "Public service announcement yoooo")
+#   deserialize("chirps.txt")

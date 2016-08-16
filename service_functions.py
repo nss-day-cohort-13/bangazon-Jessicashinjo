@@ -18,7 +18,7 @@ def deserialize(file_name):
       except EOFError:
         break
 
-    print(deserialized_data)
+    # print(deserialized_data)
     return deserialized_data
 
 def timestamp():

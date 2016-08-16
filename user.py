@@ -19,8 +19,8 @@ class User:
     # pass
 
 
-if __name__ == '__main__':
+# if __name__ == '__main__':
   # User("James Jones", "KillBill")
   # User("Juniper Jones", "JJPop")
   # User("Flipity Flop", "Fidyldydo")
-  deserialize("user_data.txt")
+  # deserialize("user_data.txt")
