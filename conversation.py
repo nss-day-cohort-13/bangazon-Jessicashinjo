@@ -11,14 +11,8 @@ class Conversations:
     self.receiver_UUID = receiver_id
     self.conversation_UUID = generate_uuid()
     self.timestamp = timestamp()
-    self.conversation_data = {
-                    "user_UUID": self.user_UUID,
-                    "chirp_UUID": self.chirp_UUID,
-                    "receiver_UUID": self.receiver_UUID,
-                    "conversation_UUID": self.conversation_UUID,
-                    "timestamp": self.timestamp
-                    }
-    serialize("conversations.txt", self.conversation_data)
+
+    serialize("conversations.txt", self)
 
 # This file will have functions that look for the selected to user...
 

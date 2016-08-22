@@ -1,43 +1,33 @@
-import pickle
-import uuid
-from datetime import datetime
-from time import time
-from user import *
 from service_functions import *
 
 class Chirps:
-  def __init__(self, user_id, user_screen_name, message, storage_file='chirps.txt'):
+  def __init__(self, user_id, user_screen_name, message, storage_file='chirps.txt', public=True):
+    """ Creates a new public chirp
+
+    Arguments:
+    ----------
+    user_id(int) = id of user creating the chirp
+    user_screen_name(str) = screen name of the user creating the chirp
+    message(str) = content of the user's message
+    storage_file(str) = file which holds the serialized deserialized_data
+    public(bool) = True if the chirp is public
+    """
     self.timestamp = timestamp()
     self.chirp_id = generate_uuid()
     self.user_uuid = user_id
     self.screen_name = user_screen_name
     self.message = message
-    self.public = True
-    self.chirp_data = {
-            "user_uuid": self.user_uuid,
-            "user_screen_name": self.screen_name,
-            "chirp_uuid": self.chirp_id,
-            "public": self.public,
-            "message": self.message,
-            "timestamp": self.timestamp
-            }
-    serialize(storage_file, self.chirp_data)
+    self.public = public
+    print("self", self)
+    serialize(storage_file, self)
 
-  # def delete_public_chirp(self, screen_name, chirp_id):
-  #   ''' Takes arguments of the user's screen name and id of the message to be
-  #       deleted:
-  #
-  #   First it will open the user_data.csv and check to see if the owner of the
-  #   chirp is the one deleting chirp. If the person deleting the chirp is not
-  #   the owner, it will throw an error saying "You cannot delete another user's
-  #   chirp". If the person deleting the chirp is the owner, it will remove the
-  #   chirp (without asking "Are you sure?") and allow the user to continue to
-  #   delete chirps until they are done.
-  #   '''
-  #   pass
+  def __str__(self):
+    return self.message
 
 
 # if __name__ == '__main__':
-#   Chirps(1643865979, 'BoBoFoSho', "Sho blamaaaaa")
-#   # PublicChirps('JJPop', "Public service announcement yoooo")
-#   deserialize("chirps.txt")
+#   chirp = Chirps(1643865979, 'BoBoFoSho', "Sho blamaaaaa")
+  # Chirps(432626436243, 'JJPop', "Public service announcement yoooo")
+  # result = deserialize("chirps.txt")
+  # for item in result:
+  #     print(item.__dict__)
