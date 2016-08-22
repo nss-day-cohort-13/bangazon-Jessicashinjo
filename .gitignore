@@ -1,0 +1,7 @@
+__pycache__
+.DS_Store
+steve_files.py
+chirps.txt
+private_chirps.txt
+user_data.txt
+conversations.txt
