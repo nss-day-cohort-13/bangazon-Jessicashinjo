@@ -3,17 +3,18 @@ import uuid
 from service_functions import *
 
 class User:
-
   def __init__(self, user_name, user_screen_name):
+    """ Creates a new user and generates a userID
+
+    Arguments:
+    ----------
+    user_name(str) = the new user's full name
+    user_screen_name(str) = the new user's screen name
+    """
     self.user_id = generate_uuid()
     self.full_name = user_name
     self.screen_name = user_screen_name
-    self.user_data = {
-                      "user_uuid": self.user_id,
-                      "user_name": self.full_name,
-                      "user_screen_name": self.screen_name
-                      }
-    serialize("user_data.txt", self.user_data)
+    serialize("user_data.txt", self)
 
   # def delete_user(self):
     # pass

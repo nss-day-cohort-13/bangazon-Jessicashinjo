@@ -29,9 +29,9 @@ class Test_User(unittest.TestCase):
     user_data = []
 
     for user in users:
-      user_data.append(user["user_uuid"])
-      user_data.append(user["user_name"])
-      user_data.append(user["user_screen_name"])
+      user_data.append(user.user_id)
+      user_data.append(user.full_name)
+      user_data.append(user.screen_name)
     # print("users List", user_list)
     self.assertIn(self.test_user.user_id, user_data)
     self.assertIn("Juniper Jones", user_data)

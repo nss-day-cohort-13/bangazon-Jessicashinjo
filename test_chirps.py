@@ -29,8 +29,8 @@ class TestChirps(unittest.TestCase):
     chirps = deserialize("chirps.txt")
     chirp_list = []
     for chirp in chirps:
-      chirp_list.append(chirp["message"])
-      chirp_list.append(chirp["chirp_uuid"])
+      chirp_list.append(chirp.message)
+      chirp_list.append(chirp.chirp_id)
     self.assertIn("If you have Monochromacy colorblindness can you truely understand color?", chirp_list)
     self.assertIsNotNone(self.test_chirp_one.chirp_id)
 

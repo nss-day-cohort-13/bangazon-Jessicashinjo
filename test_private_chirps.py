@@ -30,13 +30,13 @@ class TestChirps(unittest.TestCase):
     chirps = deserialize("private_chirps.txt")
     chirp_list = []
     for chirp in chirps:
-      chirp_list.append(chirp["user_uuid"])
-      chirp_list.append(chirp["user_screen_name"])
-      chirp_list.append(chirp["chirp_uuid"])
-      chirp_list.append(chirp["public"])
-      chirp_list.append(chirp["message"])
-      chirp_list.append(chirp["receiver_id"])
-      chirp_list.append(chirp["receiver_screen_name"])
+      chirp_list.append(chirp.user_uuid)
+      chirp_list.append(chirp.screen_name)
+      chirp_list.append(chirp.chirp_id)
+      chirp_list.append(chirp.public)
+      chirp_list.append(chirp.message)
+      chirp_list.append(chirp.receiver_id)
+      chirp_list.append(chirp.receiver_screen_name)
     # print("chirps List", chirp_list)
     self.assertIn(self.test_chirp_one.user_uuid, chirp_list)
     self.assertIn("chips", chirp_list)
@@ -44,7 +44,7 @@ class TestChirps(unittest.TestCase):
     self.assertIn("Quote of the day", chirp_list)
     self.assertIn("juice", chirp_list)
     self.assertIn(self.second_user.user_id, chirp_list)
-    self.assertIsNotNone(self.test_chirp_one.private_chirp_id)
+    self.assertIsNotNone(self.test_chirp_one.chirp_id)
 
   # def test_chirp_is_removed_from_chirps_file(self):
   #   self.write_message
